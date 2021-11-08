@@ -28,8 +28,8 @@ public class BankApplication {
 
 		int res = st.executeUpdate("CREATE TABLE clients (" +
 				"id INT NOT NULL, surname VARCHAR(50) NOT NULL," +
-				" name VARCHAR(50) NOT NULL, otchestvo VARCHAR(50) NOT NULL , phoneNumber INT NOT NULL," +
-				"mail VARCHAR(50) NOT NULL, passportNumber INT NOT NULL,PRIMARY KEY (id));" +
+				" name VARCHAR(50) NOT NULL, otchestvo VARCHAR(50) NOT NULL , phoneNumber VARCHAR(50) NOT NULL," +
+				"mail VARCHAR(50) NOT NULL, passportNumber VARCHAR(50) NOT NULL,PRIMARY KEY (id));" +
 				"");
 
 //		res = st.executeUpdate("INSERT INTO clients VALUES (0,'Fam', 'Nik', 'Alex', 123, 'asd@mai.ru', 1234);");
@@ -65,23 +65,23 @@ public class BankApplication {
 //				"(SELECT id FROM credits where limit = 10000));");
 
 
-		ResultSet result = st.executeQuery( "SELECT * FROM clients");
-		while (result.next()){
-			System.out.println(result.getInt("id")+" | "+
-					result.getString("surname")+" | "+
-					result.getString("name") +" | "+
-					result.getString("otchestvo")+" | "+
-					result.getInt("phonenumber") +" | "+
-					result.getString("mail")+" | "+
-					result.getInt("passportNumber"));
-		}
-
-		result = st.executeQuery( "SELECT * FROM credits");
-		while (result.next()){
-			System.out.println(result.getInt("id")+" | "+
-					result.getInt("limit")+" | "+
-					result.getDouble("proc"));
-		}
+//		ResultSet result = st.executeQuery( "SELECT * FROM clients");
+//		while (result.next()){
+//			System.out.println(result.getInt("id")+" | "+
+//					result.getString("surname")+" | "+
+//					result.getString("name") +" | "+
+//					result.getString("otchestvo")+" | "+
+//					result.getInt("phonenumber") +" | "+
+//					result.getString("mail")+" | "+
+//					result.getInt("passportNumber"));
+//		}
+//
+//		result = st.executeQuery( "SELECT * FROM credits");
+//		while (result.next()){
+//			System.out.println(result.getInt("id")+" | "+
+//					result.getInt("limit")+" | "+
+//					result.getDouble("proc"));
+//		}
 
 //		result = st.executeQuery( "SELECT * FROM banks");
 //		while (result.next()){

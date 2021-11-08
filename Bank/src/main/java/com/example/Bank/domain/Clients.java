@@ -13,12 +13,12 @@ public class Clients {
     private UUID id;
 
     private String name, surname, otchestvo, mail;
-    private int phoneNumber, passportNumber;
+    private String phoneNumber, passportNumber;
 
     public Clients() {
     }
 
-    public Clients(String name, String surname, String otchestvo, String mail, int phoneNumber, int passportNumber) {
+    public Clients(String name, String surname, String otchestvo, String mail, String phoneNumber, String passportNumber) {
         this.name = name;
         this.surname = surname;
         this.otchestvo = otchestvo;
@@ -67,19 +67,19 @@ public class Clients {
         this.mail = mail;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getPassportNumber() {
+    public String getPassportNumber() {
         return passportNumber;
     }
 
-    public void setPassportNumber(int passportNumber) {
+    public void setPassportNumber(String passportNumber) {
         this.passportNumber = passportNumber;
     }
 }

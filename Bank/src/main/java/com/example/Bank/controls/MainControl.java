@@ -79,8 +79,8 @@ public class MainControl {
 
     @PostMapping(value="/clients")
     public String clientsAdd(@RequestParam String name, @RequestParam String surname,
-                            @RequestParam String otchestvo, @RequestParam Integer phoneNumber,
-                            @RequestParam String mail, @RequestParam Integer passportNumber,
+                            @RequestParam String otchestvo, @RequestParam String phoneNumber,
+                            @RequestParam String mail, @RequestParam String passportNumber,
                             Map<String,Object> map){
 
         Clients clients = new Clients(name, surname, otchestvo, mail, phoneNumber, passportNumber);
@@ -104,7 +104,7 @@ public class MainControl {
 
         for(Clients cl: it)
             if(cl.getName().equals(clients.getName()) && cl.getOtchestvo().equals(clients.getOtchestvo()) &&
-                    cl.getSurname().equals(clients.getSurname()) && cl.getPassportNumber() == clients.getPassportNumber()){
+                    cl.getSurname().equals(clients.getSurname()) && Objects.equals(cl.getPassportNumber(), clients.getPassportNumber())){
                 pr =false;
                 break;
             }
@@ -140,8 +140,8 @@ public class MainControl {
 
     @PostMapping(value="/redact")
     public String clientEdit2(@RequestParam String name, @RequestParam String surname,
-                              @RequestParam String otchestvo, @RequestParam Integer phoneNumber,
-                              @RequestParam String mail, @RequestParam Integer passportNumber,
+                              @RequestParam String otchestvo, @RequestParam String phoneNumber,
+                              @RequestParam String mail, @RequestParam String passportNumber,
                               Map<String,Object> map){
 
         if(!regEdit.equals("")) {
@@ -266,6 +266,7 @@ public class MainControl {
         mapFindClients(map);
         mapOfClCr(map);
         mapEditNull(map);
+        map.put("rez", "");
 
         return "ofcredits";
     }
@@ -280,11 +281,17 @@ public class MainControl {
         mapFindCredits(map);
         mapFindClients(map);
 
-        ofCredits ofCredits = new ofCredits(UUID.fromString(client), UUID.fromString(credit), summa, month);
-        ofCreditsRepo.save(ofCredits);
+        Credits credits = creditsRepo.findById(UUID.fromString(credit));
+        if(credits.getLimitMin() < summa && summa <= credits.getLimitMax()) {
+            ofCredits ofCredits = new ofCredits(UUID.fromString(client), UUID.fromString(credit), summa, month);
+            ofCreditsRepo.save(ofCredits);
 
+            mapRas(ofCredits, map);
+            map.put("rez", "");
+        }
+        else
+            map.put("rez", "Сумма не входит в лимит кредита");
 
-        mapRas(ofCredits, map);
         mapOfClCr(map);
         mapEditNull(map);
 
@@ -330,6 +337,7 @@ public class MainControl {
         mapFindClients(map);
         mapOfClCr(map);
         mapEditNull(map);
+        map.put("rez", "");
 
         return "ofcredits";
     }
@@ -348,6 +356,7 @@ public class MainControl {
         mapFindCredits(map);
         mapFindClients(map);
         mapOfClCr(map);
+        map.put("rez", "");
 
         return "ofcredits";
     }
@@ -374,6 +383,7 @@ public class MainControl {
         mapFindClients(map);
         mapOfClCr(map);
         mapEditNull(map);
+        map.put("rez", "");
 
         return "ofcredits";
     }
@@ -388,6 +398,8 @@ public class MainControl {
         mapFindClients(map);
         mapOfClCr(map);
         mapEditNull(map);
+        map.put("rez", "");
+
         return "ofcredits";
     }
 }

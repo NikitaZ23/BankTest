@@ -8,6 +8,5 @@ import java.util.List;
 import java.util.UUID;
 
 public interface ClientsRepo extends CrudRepository<Clients,Long> {
-    List<Clients> findByName(String name);
     Clients findById(UUID id);
 }
