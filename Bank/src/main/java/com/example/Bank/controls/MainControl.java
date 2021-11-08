@@ -377,4 +377,17 @@ public class MainControl {
 
         return "ofcredits";
     }
+
+    @GetMapping("/rasW")
+    public String rasW(@RequestParam String id,
+                       Map<String,Object> map) {
+        ofCredits of = ofCreditsRepo.findById(UUID.fromString(id));
+        map.put("grafPl", rasRepo.findByidOfCr(of.getId()));
+
+        mapFindCredits(map);
+        mapFindClients(map);
+        mapOfClCr(map);
+        mapEditNull(map);
+        return "ofcredits";
+    }
 }
