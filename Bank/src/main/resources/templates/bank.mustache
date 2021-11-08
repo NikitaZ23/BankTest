@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank</title>
+    <style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, td, th {
+        border: 1px solid #999;
+        padding: 5px;
+    }
+    </style>
+</head>
+<body>
+<div><a href="/">Главная</a></div>
+<div>Список кредитов:</div>
+
+<div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Минимальный лимит</th>
+            <th>Максимальный лимит</th>
+            <th>Процент</th>
+        </tr>
+        {{#credits}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{limitMin}}</td>
+                <td>{{limitMax}}</td>
+                <td>{{proc}}</td>
+            </tr>
+        {{/credits}}
+    </table>
+</div>
+
+<div>Список клиентов:</div>
+<div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Фамилия</th>
+            <th>Номер телефона</th>
+            <th>Номер паспорта</th>
+            <th>mail</th>
+        </tr>
+
+        {{#clients}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{otchestvo}}</td>
+                <td>{{surname}}</td>
+                <td>{{phoneNumber}}</td>
+                <td>{{passportNumber}}</td>
+                <td>{{mail}}</td>
+            </tr>
+        {{/clients}}
+
+    </table>
+</div>
+</body>
+</html>

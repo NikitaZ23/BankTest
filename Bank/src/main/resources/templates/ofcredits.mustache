@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Оформление кредитов</title>
+    <style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, td, th {
+        border: 1px solid #999;
+        padding: 5px;
+    }
+    .form_wrapper {
+        width: 1000px; /* the width of half of your space or 50% */
+        float: left;
+    }
+    </style>
+</head>
+<body>
+
+<div><a href="/">Главная</a></div>
+
+<form  method="post">
+    <input type="text" name="client" placeholder="Клиент" value="" required>
+    <input type="text" name="credit" placeholder="Кредит" value="" required>
+    <input type="double" id="n1" name="summa" placeholder="Сумма" value="" required>
+    <input type="int" id="n2" name="month" placeholder="На сколько месяцев" value="1" required>
+    <script>
+        document.getElementById('n1').onkeydown = function (e) {
+            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));  // IE > 9
+        }
+        document.getElementById('n2').onkeydown = function (e) {
+            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));  // IE > 9
+        }
+    </script>
+    <button type="submit">Расчитать</button>
+</form>
+
+<div>Редактировать оформленный кредит</div>
+<div>Номер ID:</div>
+<form method="put" action="oFredact">
+    <input text="text" name="id" required>
+    <button type="submit">Найти</button>
+</form>
+
+<div>
+    <form method="put" action="oFEdit">
+        <input type="double" id="n1" name="summa" placeholder="Сумма" value="{{summaEdit}}">
+        <input type="int" id="n2" name="month" placeholder="На сколько месяцев" value="{{monthEdit}}">
+        <script>
+        document.getElementById('n1').onkeydown = function (e) {
+            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));  // IE > 9
+        }
+        document.getElementById('n2').onkeydown = function (e) {
+            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));  // IE > 9
+        }
+    </script>
+        <button type="submit">Редактировать</button>
+    </form>
+</div>
+
+<div>Удалить оформленный кредит</div>
+<div>Номер ID:</div>
+<form method="delete" action="oFdelete">
+    <input text="text" name="id" required>
+    <button type="submit">Найти</button>
+</form>
+
+
+<form>
+    Рассчет предложения:
+    <table>
+        <tr>
+            <th>Дата платежа</th>
+            <th>Сумма платежа</th>
+            <th>Сумма гашения тела кредита</th>
+            <th>Сумма гашения процентов</th>
+        </tr>
+
+        {{^grafPl.isEmpty}}
+            {{#grafPl}}
+            <tr>
+                <td>{{date}}</td>
+                <td>{{summa}}</td>
+                <td>{{summaTelCr}}</td>
+                <td>{{summaPr}}</td>
+            </tr>
+            {{/grafPl}}
+        {{/grafPl.isEmpty}}
+    </table>
+</form>
+
+<form class="form_wrapper">
+    Список клиентов:
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Фамилия</th>
+            <th>Номер телефона</th>
+            <th>Номер паспорта</th>
+            <th>mail</th>
+        </tr>
+
+        {{#clients}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{name}}</td>
+                <td>{{otchestvo}}</td>
+                <td>{{surname}}</td>
+                <td>{{phoneNumber}}</td>
+                <td>{{passportNumber}}</td>
+                <td>{{mail}}</td>
+            </tr>
+        {{/clients}}
+
+    </table>
+</form>
+
+<form>
+
+Список кредитов:
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Минимальный лимит</th>
+            <th>Максимальный лимит</th>
+            <th>Процент</th>
+        </tr>
+        {{#credits}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{limitMin}}</td>
+                <td>{{limitMax}}</td>
+                <td>{{proc}}</td>
+            </tr>
+        {{/credits}}
+    </table>
+</form>
+
+<form>
+
+    Список оформленных:
+
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Клиент</th>
+            <th>Кредит</th>
+            <th>Сумма</th>
+            <th>На сколько месяцев</th>
+        </tr>
+        {{#ofclcr}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{id_cl}}</td>
+                <td>{{id_cr}}</td>
+                <td>{{summa}}</td>
+                <td>{{month}}</td>
+            </tr>
+        {{/ofclcr}}
+    </table>
+</form>
+
+</body>
+</html>

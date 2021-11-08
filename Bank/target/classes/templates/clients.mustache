@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clients</title>
+    <style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, td, th {
+        border: 1px solid #999;
+        padding: 5px;
+    }
+    </style>
+</head>
+<body>
+<div>{{nameG}}</div>
+
+<div><a href="/">Главная</a></div>
+
+<form  method="post">
+        <input type="text" name="name" placeholder="Имя" value="{{name}}" required>
+        <input type="text" name="surname" placeholder="Фамилия" value="{{surname}}" required>
+        <input type="text" name="otchestvo" placeholder="Отчество" value="{{otchestvo}}" required>
+        <input type="int" id="n1" name="phoneNumber" placeholder="Телефон" value="{{phoneNumber}}" required>
+        <input type="text" name="mail" placeholder="Почта" value="{{mail}}" required>
+        <input type="int" id="n2" name="passportNumber" placeholder="Номер паспорта" value="{{passportNumber}}" required>
+        <button type="submit">{{nameBut}}</button>
+        <script>
+        document.getElementById('n1').onkeydown = function (e) {
+            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));  // IE > 9
+        }
+        document.getElementById('n2').onkeydown = function (e) {
+            return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));  // IE > 9
+        }
+        </script>
+        {{res}}
+</form>
+
+
+
+<div>Редактировать клиента</div>
+Номер ID:</div>
+<form method="put" action="redact">
+    <input text="text" name="id" required>
+    <button type="submit">Найти</button>
+</form>
+
+<div>Удалить клиента</div>
+<div>Номер ID:</div>
+<form method="delete" action="delete">
+    <input text="text" name="id" required>
+    <button type="submit">Найти</button>
+</form>
+
+    <div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Фамилия</th>
+            <th>Номер телефона</th>
+            <th>Номер паспорта</th>
+            <th>mail</th>
+        </tr>
+
+        {{#clients}}
+        <tr>
+            <td>{{id}}</td>
+            <td>{{name}}</td>
+            <td>{{otchestvo}}</td>
+            <td>{{surname}}</td>
+            <td>{{phoneNumber}}</td>
+            <td>{{passportNumber}}</td>
+            <td>{{mail}}</td>
+        </tr>
+        {{/clients}}
+
+    </table>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Credits</title>
+    <style>
+    table {
+        border-collapse: collapse;
+    }
+
+    table, td, th {
+        border: 1px solid #999;
+        padding: 5px;
+    }
+    </style>
+</head>
+<body>
+<div><a href="/">Главная</a></div>
+<div>
+<form  method="post">
+        <input type="double" id="n1" name="limitMin" placeholder="Минимальный лимит" value="{{limitMin}}" required>
+        <input type="double" id="n2" name="limitMax" placeholder="Максимальный лимит" value="{{limitMax}}" required>
+        <input type="double" id="n3" name="proc" placeholder="Процентная ставка" value="{{proc}}" required>
+        <button type="submit">{{nameBut}}</button>
+        <script>
+            document.getElementById('n1').onkeydown = function (e) {
+                return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));  // IE > 9
+            }
+            document.getElementById('n2').onkeydown = function (e) {
+                return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));  // IE > 9
+            }
+            document.getElementById('n3').onkeydown = function (e) {
+                return !(/^[А-Яа-яA-Za-z ]$/.test(e.key));  // IE > 9
+            }
+        </script>
+        {{rez}}
+</form>
+</div>
+
+<div>Редактировать кредит</div>
+Номер ID:</div>
+<form method="put" action="crRedact">
+    <input text="text" name="id" required>
+    <button type="submit">Найти</button>
+</form>
+
+<div>Удалить кредит</div>
+<div>Номер ID:</div>
+<form method="delete" action="crDelete">
+    <input text="text" name="id" required>
+    <button type="submit">Найти</button>
+</form>
+
+<div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Минимальный лимит</th>
+            <th>Максимальный лимит</th>
+            <th>Процент</th>
+        </tr>
+        {{#credits}}
+            <tr>
+                <td>{{id}}</td>
+                <td>{{limitMin}}</td>
+                <td>{{limitMax}}</td>
+                <td>{{proc}}</td>
+            </tr>
+        {{/credits}}
+    </table>
+</div>
+
+
+
+</body>
+</html>
